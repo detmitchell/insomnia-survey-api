@@ -2,14 +2,19 @@ const httpStatus = require('http-status');
 const to = require('await-to-js').default;
 
 const service = require('../services/survey.service');
+const logger = require('../logger');
 
 const createSurvey = async (req, res, next) => {
+  logger.info('controller - createSurvey ...');
+  
   const [err, result] = await to(service.createSurvey(req.body));
   if(err) return next(err);
   res.status(httpStatus.CREATED).send(result);
 };
 
 const getSurveys = async (req, res, next) => {
+  logger.info('controller - getSurveys ...');
+
   const filter = {};
   if (req.query.name) {
     filter.name = req.query.name;
@@ -25,18 +30,24 @@ const getSurveys = async (req, res, next) => {
 }
 
 const getSurvey = async (req, res, next) => {
+  logger.info('controller - getSurvey ...');
+
   const [err, result] = await to(service.getSurveyById(req.params.surveyId));
   if(err) return next(err);
   res.status(httpStatus.OK).send(result);
 };
 
 const updateSurvey = async (req, res, next) => {
+  logger.info('controller - updateSurvey ...');
+
   const [err, result] = await to(service.updateSurvey(req.params.surveyId, req.body));
   if(err) return next(err);
   res.status(httpStatus.OK).send(result);
 };
 
 const deleteSurvey = async (req, res, next) => {
+  logger.info('controller - deleteSurvey ...');
+
   const [err, result] = await to(service.deleteSurvey(req.params.surveyId));
   if(err) return next(err);
   res.status(httpStatus.OK).send(result);

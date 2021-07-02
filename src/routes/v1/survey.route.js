@@ -1,5 +1,7 @@
 const express = require('express');
 const controller = require('../../controllers/survey.controller');
+const validator = require('../../validators/survey.validator');
+const validate = require('../../middlewares/validate');
 
 const router = express.Router();
 
@@ -10,8 +12,8 @@ router
 
 router
   .route('/:surveyId')
-  .get(/*TODO: validator.getSurvey,*/ controller.getSurvey)
-  .put(/*TODO: validator.updateSurvey,*/ controller.updateSurvey)
-  .delete(/*TODO: validator.deleteSurvey,*/ controller.deleteSurvey);
+  .get(controller.getSurvey)
+  .put(validate(validator.updateSurvey), controller.updateSurvey)
+  .delete(controller.deleteSurvey);
 
 module.exports = router;
