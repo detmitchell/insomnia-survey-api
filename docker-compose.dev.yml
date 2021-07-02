@@ -1,6 +1,6 @@
 version: '3'
 
 services:
-  node-app:
-    container_name: node-app-dev
+  insomnia-survey-api:
+    container_name: insomnia-survey-api-dev
     command: yarn start -L
